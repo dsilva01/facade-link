@@ -3,7 +3,7 @@
     <div class="mx-auto w-full max-w-2xl px-4 sm:px-6">
         <div class="pt-6 md:pt-10">
             <div class="mt-20 flex justify-between items-center">
-                <h1 class="font-mona text-2xl font-medium">
+                <h1 class="text-2xl font-semibold">
                     Teus links
                 </h1>
                 <button onclick="new_link.showModal()"
@@ -17,7 +17,9 @@
                 </button>
             </div>
             <div class="grid grid-cols-1 gap-6 pb-8 pt-8 md:pb-10 md:pt-12">
-                <livewire:components.link-card />
+                @foreach ($links as $link)
+                    <livewire:components.link-card :id="$link->id" />
+                @endforeach
             </div>
         </div>
     </div>

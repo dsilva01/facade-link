@@ -14,10 +14,9 @@ return new class extends Migration {
         Schema::create('links', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->string('original_url');
-            $table->string('slug')->unique();
+            $table->text('destination_url');
+            $table->string('url_key')->unique();
             $table->string('title')->nullable();
-            $table->unsignedBigInteger('clicks')->default(0);
             $table->timestamps();
         });
     }

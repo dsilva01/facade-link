@@ -4,8 +4,8 @@
         <div class="card-body">
             <div class="flex justify-between items-center mb-4">
                 <div>
-                    <h2 class="font-bold md:text-lg">Special Product Promotion</h2>
-                    <p class="text-sm text-slate-500">https://tailwindcss.com/docs/max-width</p>
+                    <h2 class="font-semibold md:text-lg">{{ $link->title }}</h2>
+                    <p class="text-sm text-slate-500">{{ $link->destination_url }}</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="#">
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-between bg-slate-950 rounded-lg p-3">
-                <span class="text-sm font-medium text-slate-600">https://tailwindcss.com/docs/max-width</span>
+                <span class="text-sm font-medium text-slate-600">{{ route('link.redirect', $link->url_key) }}</span>
                 <button class="flex items-center text-sm gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -38,7 +38,7 @@
             <div class="mt-3 flex items-center justify-between text-sm text-slate-500">
                 <span>Total Clicks: 150</span>
                 <span>
-                    Created 10/03/2024
+                    Criado {{ $link->created_at }}
                 </span>
             </div>
         </div>

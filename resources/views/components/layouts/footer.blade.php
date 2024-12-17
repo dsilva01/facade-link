@@ -1,6 +1,7 @@
-<footer class="footer footer-center overflow-hidden px-6 pb-12 pt-12 md:pb-24 md:pt-16 lg:px-8">
+<footer
+    class="footer footer-center antialiased text-slate-200 tracking-tight overflow-hidden px-6 pb-12 pt-12 md:pb-24 md:pt-16 lg:px-8">
     <aside>
-        <p class="font-bold">
+        <p>
             {{ config('app.name') }}
             <br />
             Created by
