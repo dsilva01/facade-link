@@ -14,8 +14,8 @@ use Laravel\Socialite\Facades\Socialite;
 Route::get('/', Landing::class)->name('landing');
 Route::get('/dashboard', Dashboard::class)->name('dashboard')->middleware('auth');
 Route::get('/settings', Settings::class)->name('settings')->middleware('auth');
-
-Route::get('/{URLKey}', LinkController::class)->name('link.redirect');
+Route::post('/links', [LinkController::class, 'store'])->name('links.store')->middleware('auth');
+Route::get('/{URLKey}', LinkController::class)->name('links.redirect');
 
 Route::redirect('/auth/login', '/auth/google/redirect')->name('login');
 
@@ -23,7 +23,7 @@ Route::get('/auth/google/redirect', function () {
     return Socialite::driver('google')->redirect();
 })->name('auth.google.redirect');
 
-Route::get('/auth/google/callback', function () {
+Route::get('/auth/google/callback', function (Request $request) {
     $socialUser = Socialite::driver('google')->stateless()->user();
 
     $user = User::where('email', $socialUser->email)->first();
@@ -40,12 +40,13 @@ Route::get('/auth/google/callback', function () {
 
     Auth::login($user);
 
-    return redirect()->route('dashboard');
+    return redirect()->intended('dashboard');
 });
 
 Route::get('/auth/logout', function (Request $request) {
     Auth::logout();
 
+    $request->session()->flush();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 

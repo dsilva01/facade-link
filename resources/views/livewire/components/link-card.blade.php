@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-between bg-slate-950 rounded-lg p-3">
-                <span class="text-sm font-medium text-slate-600">{{ route('link.redirect', $link->url_key) }}</span>
+                <span class="text-sm font-medium text-slate-600">{{ route('links.redirect', $link->url_key) }}</span>
                 <button class="flex items-center text-sm gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">

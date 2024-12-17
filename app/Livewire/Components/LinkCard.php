@@ -3,10 +3,8 @@
 namespace App\Livewire\Components;
 
 use App\Models\Link;
-use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
-#[Lazy]
 class LinkCard extends Component
 {
     public $link;

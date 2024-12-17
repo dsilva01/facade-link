@@ -18,7 +18,7 @@ class NewLinkModal extends Component
 
     public function mount()
     {
-        $this->user_id = auth()->user()->id;
+        $this->user_id = auth()->id();
     }
 
     public function store(CreateNewLink $createNewLink)

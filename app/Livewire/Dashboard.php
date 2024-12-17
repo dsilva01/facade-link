@@ -11,7 +11,7 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->links = Link::all();
+        $this->links = Link::where('user_id', auth()->id())->get();
     }
 
     public function render()
