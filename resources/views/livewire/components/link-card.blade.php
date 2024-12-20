@@ -24,16 +24,30 @@
                     </a>
                 </div>
             </div>
-            <div class="flex items-center justify-between bg-slate-950 rounded-lg p-3">
+            <div x-data="{ textToCopy: '{{ route('links.redirect', $link->url_key) }}', copied: false }" class="flex items-center justify-between bg-slate-950 rounded-lg p-3">
                 <span id="text-copy-{{ $link->id }}"
                     class="text-sm font-medium text-slate-600">{{ route('links.redirect', $link->url_key) }}</span>
-                <button id="btn-copy-{{ $link->id }}" class="flex items-center text-sm gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    Copiar
+                <button class="flex items-center text-sm"
+                    @click="navigator.clipboard.writeText(textToCopy).then(() => { 
+                        copied = true; 
+                        setTimeout(() => copied = false, 1500); 
+                    })">
+
+                    <span x-show="!copied" class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copiar
+                    </span>
+                    <span x-show="copied" class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Copiado!
+                    </span>
                 </button>
             </div>
             <div class="mt-3 flex items-center justify-between text-sm text-slate-500">
@@ -45,12 +59,3 @@
         </div>
     </div>
 </div>
-
-@script
-    <script>
-        document.getElementById("btn-copy-{{ $link->id }}").addEventListener('click', function() {
-            const text = document.getElementById('text-copy-{{ $link->id }}').textContent;
-            navigator.clipboard.writeText(text)
-        });
-    </script>
-@endscript
