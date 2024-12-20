@@ -8,21 +8,27 @@
             <form wire:submit="store">
                 <div class="w-full mt-5">
                     <div class="mb-4">
-                        <label class="block text-sm" for="name">
+                        <label class="block text-sm" for="destination_url">
                             URL
                         </label>
-                        <input wire:model="destination_url"
+                        <input wire:model.live="destination_url"
                             class="input input-bordered block w-full resize-none rounded-lg text-white text-sm border-slate-500/70 bg-slate-900/50 shadow-sm p-3 mt-2 focus:border-purple-500/50 focus:ring-slate-900"
-                            id="url" type="text" placeholder="https://example.com" name="url"
-                            required="required" autofocus="autofocus" autocomplete="url">
+                            id="destination_url" type="url" placeholder="https://example.com" name="destination_url"
+                            required="required" autofocus="autofocus" autocomplete="destination_url">
+                        @error('destination_url')
+                            <span class="text-sm text-red-500 mt-2">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm" for="name">
+                        <label class="block text-sm" for="title">
                             Título do link (opcional)
                         </label>
                         <input wire:model="title"
                             class="input input-bordered block w-full resize-none rounded-lg text-white text-sm border-slate-500/70 bg-slate-900/50 shadow-sm p-3 mt-2 focus:border-purple-500/50 focus:ring-slate-900"
                             id="title" type="text" name="title" autofocus="autofocus" autocomplete="title">
+                        @error('title')
+                            <span class="text-sm text-red-500 mt-2">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-action">

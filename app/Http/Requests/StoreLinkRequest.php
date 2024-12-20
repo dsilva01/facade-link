@@ -22,7 +22,8 @@ class StoreLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'destination_url' => ['required', 'url'],
+            'title' => ['nullable', 'string'],
         ];
     }
 }

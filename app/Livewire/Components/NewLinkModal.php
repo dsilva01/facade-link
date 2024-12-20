@@ -4,13 +4,16 @@ namespace App\Livewire\Components;
 
 use App\Actions\CreateNewLink;
 use App\Data\StoreLinkDTOData;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Attributes\Locked;
 
 class NewLinkModal extends Component
 {
+    #[Validate('required|url')]
     public string $destination_url;
 
+    #[Validate('nullable')]
     public ?string $title;
 
     #[Locked]
@@ -23,6 +26,8 @@ class NewLinkModal extends Component
 
     public function store(CreateNewLink $createNewLink)
     {
+        $this->validate();
+
         $dto = StoreLinkDTOData::from($this->all());
 
         $createNewLink->handle($dto);

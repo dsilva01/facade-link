@@ -25,8 +25,9 @@
                 </div>
             </div>
             <div class="flex items-center justify-between bg-slate-950 rounded-lg p-3">
-                <span class="text-sm font-medium text-slate-600">{{ route('links.redirect', $link->url_key) }}</span>
-                <button class="flex items-center text-sm gap-1">
+                <span id="text-copy-{{ $link->id }}"
+                    class="text-sm font-medium text-slate-600">{{ route('links.redirect', $link->url_key) }}</span>
+                <button id="btn-copy-{{ $link->id }}" class="flex items-center text-sm gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,9 +39,18 @@
             <div class="mt-3 flex items-center justify-between text-sm text-slate-500">
                 <span>Total Clicks: 150</span>
                 <span>
-                    Criado {{ $link->created_at }}
+                    Criado: {{ $link->created_at->format('d/m/Y') }}
                 </span>
             </div>
         </div>
     </div>
 </div>
+
+@script
+    <script>
+        document.getElementById("btn-copy-{{ $link->id }}").addEventListener('click', function() {
+            const text = document.getElementById('text-copy-{{ $link->id }}').textContent;
+            navigator.clipboard.writeText(text)
+        });
+    </script>
+@endscript
