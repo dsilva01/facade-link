@@ -51,7 +51,7 @@
                 </button>
             </div>
             <div class="mt-3 flex items-center justify-between text-sm text-slate-500">
-                <span>Total Clicks: 150</span>
+                <span>Total Clicks: {{ $link->link_visits_count }}</span>
                 <span>
                     Criado: {{ $link->created_at->format('d/m/Y') }}
                 </span>

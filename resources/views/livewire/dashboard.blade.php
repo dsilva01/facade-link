@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-semibold">
                     Teus links
                 </h1>
-                <button onclick="new_link.showModal()"
+                <button wire:click="$dispatch('show-link-modal')"
                     class="btn btn-neutral bg-purple-600 hover:bg-purple-600 font-semibold text-slate-100 shadow-2xl shadow-purple-950/50 border-none rounded-full p-4 ocus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
                         <path fillRule="evenodd"
@@ -18,10 +18,22 @@
             </div>
             <div class="grid grid-cols-1 gap-6 pb-8 pt-8 md:pb-10 md:pt-12">
                 @foreach ($links as $link)
-                    <livewire:components.link-card :id="$link->id" />
+                    <livewire:components.link-card :linkId="$link->id" />
                 @endforeach
             </div>
         </div>
     </div>
     <livewire:components.new-link-modal />
 </div>
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('show-link-modal', (event) => {
+            document.getElementById('link_modal').showModal()
+        });
+
+        Livewire.on('close-link-modal', (event) => {
+            document.getElementById('link_modal').close()
+        });
+    });
+</script>

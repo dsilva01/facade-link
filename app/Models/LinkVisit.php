@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LinkVisit extends Model
 {
@@ -17,4 +18,9 @@ class LinkVisit extends Model
         'device_type',
         'visited_at'
     ];
+
+    public function link(): BelongsTo
+    {
+        return $this->belongsTo(Link::class, 'link_id');
+    }
 }

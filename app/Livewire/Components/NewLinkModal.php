@@ -4,6 +4,8 @@ namespace App\Livewire\Components;
 
 use App\Actions\CreateNewLink;
 use App\Data\StoreLinkDTOData;
+use App\Livewire\Dashboard;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Attributes\Locked;
@@ -32,7 +34,14 @@ class NewLinkModal extends Component
 
         $createNewLink->handle($dto);
 
-        $this->reset();
+        $this->dispatch('link-created')->to(Dashboard::class);
+        $this->dispatch('close-link-modal');
+    }
+
+    #[On('close-link-modal')]
+    public function closeModal()
+    {
+        $this->resetExcept('user_id');
     }
 
     public function render()

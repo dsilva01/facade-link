@@ -3,18 +3,20 @@
 namespace App\Livewire\Components;
 
 use App\Models\Link;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class LinkCard extends Component
 {
-    public $link;
+    #[Locked]
+    public string $linkId;
 
-    public function mount(string $id)
-    {
-        $this->link = Link::find($id);
-    }
     public function render()
     {
-        return view('livewire.components.link-card');
+        return view('livewire.components.link-card', [
+            'link' => Link::where('id', $this->linkId)
+                ->withCount('link_visits')
+                ->firstOrFail()
+        ]);
     }
 }

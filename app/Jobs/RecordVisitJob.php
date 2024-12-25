@@ -16,15 +16,14 @@ class RecordVisitJob implements ShouldQueue
      */
     public function __construct(
         protected StoreLinkVisitDTOData $dto,
-        protected RecordVisit $recordVisit
     ) {
     }
 
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(RecordVisit $recordVisit): void
     {
-        $this->recordVisit->handle($this->dto);
+        $recordVisit->handle($this->dto);
     }
 }

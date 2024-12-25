@@ -3,19 +3,24 @@
 namespace App\Livewire;
 
 use App\Models\Link;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public $links;
-
-    public function mount()
+    #[On('link-created')]
+    public function refresh(): void
     {
-        $this->links = Link::where('user_id', auth()->id())->get();
+        //
     }
 
     public function render()
     {
-        return view('livewire.dashboard');
+        $user = auth()->user();
+        $links = $user->links;
+
+        return view('livewire.dashboard', [
+            'links' => $links
+        ]);
     }
 }
