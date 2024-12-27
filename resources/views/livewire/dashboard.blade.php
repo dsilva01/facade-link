@@ -8,11 +8,7 @@
                 </h1>
                 <button wire:click="$dispatch('show.modal')"
                     class="btn btn-neutral bg-purple-600 hover:bg-purple-600 font-semibold text-slate-100 shadow-2xl shadow-purple-950/50 border-none rounded-full p-4 ocus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
-                        <path fillRule="evenodd"
-                            d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
-                            clipRule="evenodd" />
-                    </svg>
+                    <x-icons.plus class="size-4" />
                     Criar novo link
                 </button>
             </div>

@@ -4,7 +4,6 @@ namespace App\Livewire\Components;
 
 use App\Actions\CreateNewLink;
 use App\Data\StoreLinkDTOData;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Locked;
 
@@ -22,6 +21,7 @@ class NewLinkModal extends Component
         $validated = $this->validate([
             'destination_url' => 'required|max:100|url',
             'title' => ['nullable'],
+            'user_id' => 'required|exists:users,id',
         ]);
 
         $dto = StoreLinkDTOData::from($validated);
@@ -33,12 +33,6 @@ class NewLinkModal extends Component
 
         $this->dispatch('link.created');
         $this->dispatch('close.modal');
-    }
-
-    #[On('close.modal')]
-    public function closeModal()
-    {
-        $this->resetExcept('user_id');
     }
 
     public function render()
