@@ -16,8 +16,7 @@ class RecordVisitJob implements ShouldQueue
      */
     public function __construct(
         protected StoreLinkVisitDTOData $dto,
-    ) {
-    }
+    ) {}
 
     /**
      * Execute the job.

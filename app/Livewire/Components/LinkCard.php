@@ -16,7 +16,7 @@ class LinkCard extends Component
         return view('livewire.components.link-card', [
             'link' => Link::where('id', $this->linkId)
                 ->withCount('link_visits')
-                ->firstOrFail()
+                ->firstOrFail(),
         ]);
     }
 }

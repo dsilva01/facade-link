@@ -10,13 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Link extends Model
 {
     use HasUuids;
+
     protected $fillable = [
         'user_id',
         'destination_url',
         'url_key',
         'title',
     ];
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

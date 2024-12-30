@@ -4,8 +4,8 @@ namespace App\Livewire\Components;
 
 use App\Actions\CreateNewLink;
 use App\Data\StoreLinkDTOData;
-use Livewire\Component;
 use Livewire\Attributes\Locked;
+use Livewire\Component;
 
 class NewLinkModal extends Component
 {

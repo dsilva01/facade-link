@@ -16,7 +16,7 @@ class LinkVisit extends Model
         'browser_version',
         'referer_url',
         'device_type',
-        'visited_at'
+        'visited_at',
     ];
 
     public function link(): BelongsTo

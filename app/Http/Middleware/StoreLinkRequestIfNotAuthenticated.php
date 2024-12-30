@@ -15,8 +15,9 @@ class StoreLinkRequestIfNotAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             session(['destination_url' => $request->destination_url]);
+
             return redirect()->route('login');
         }
 

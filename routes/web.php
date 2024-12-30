@@ -29,13 +29,13 @@ Route::get('/auth/google/callback', function (Request $request) {
 
     $user = User::where('email', $socialUser->email)->first();
 
-    if (!$user) {
+    if (! $user) {
         $user = User::create([
             'name' => $socialUser->name,
             'email' => $socialUser->email,
             'avatar' => $socialUser->avatar,
             'email_verified_at' => now(),
-            'password' => Hash::make(rand(100000, 999999))
+            'password' => Hash::make(rand(100000, 999999)),
         ]);
     }
 
@@ -56,5 +56,6 @@ Route::get('/auth/logout', function (Request $request) {
 
 Route::get('/auth/auto', function (Request $request) {
     Auth::login(User::first());
+
     return redirect()->route('dashboard');
 });

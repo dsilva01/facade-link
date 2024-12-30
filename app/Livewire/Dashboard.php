@@ -21,9 +21,7 @@ class Dashboard extends Component
 
     #[On('link.created')]
     #[On('link.destroyed')]
-    public function refresh()
-    {
-    }
+    public function refresh() {}
 
     public function render()
     {
@@ -31,7 +29,7 @@ class Dashboard extends Component
 
         return view('livewire.dashboard', [
             'user' => $user,
-            'links' => $user->links()->latest()->get()
+            'links' => $user->links()->latest()->get(),
         ]);
     }
 }

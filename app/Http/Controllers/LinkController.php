@@ -20,7 +20,7 @@ class LinkController extends Controller
             'link_id' => $link->id,
             'ip_address' => $request->ip(),
             'referer_url' => $request->headers->get('referer'),
-            'visited_at' => now()
+            'visited_at' => now(),
         ]);
 
         RecordVisitJob::dispatch($dto);
