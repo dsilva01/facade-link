@@ -8,7 +8,7 @@ use Livewire\Component;
 class LinkShortener extends Component
 {
     #[Validate('required|max:100|url')]
-    public $destination_url;
+    public string $destination_url;
 
     public function render()
     {

@@ -16,7 +16,7 @@ class NewLinkModal extends Component
     #[Locked]
     public string $user_id;
 
-    public function store(CreateNewLink $createNewLink)
+    public function store(CreateNewLink $createNewLink): void
     {
         $validated = $this->validate([
             'destination_url' => 'required|max:100|url',

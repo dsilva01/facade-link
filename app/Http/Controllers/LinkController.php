@@ -8,11 +8,12 @@ use App\Data\StoreLinkVisitDTOData;
 use App\Http\Requests\StoreLinkRequest;
 use App\Jobs\RecordVisitJob;
 use App\Models\Link;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
-    public function __invoke(Request $request, string $URLKey)
+    public function __invoke(Request $request, string $URLKey): RedirectResponse
     {
         $link = Link::where('url_key', $URLKey)->firstOrFail();
 
@@ -28,7 +29,7 @@ class LinkController extends Controller
         return redirect()->away($link->destination_url);
     }
 
-    public function store(StoreLinkRequest $request, CreateNewLink $createNewLink)
+    public function store(StoreLinkRequest $request, CreateNewLink $createNewLink): RedirectResponse
     {
         $dto = StoreLinkDTOData::from([
             'user_id' => $request->user()->id,

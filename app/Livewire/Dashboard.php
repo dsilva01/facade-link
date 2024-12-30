@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public function deleteLink(string $linkId)
+    public function deleteLink(string $linkId): void
     {
         $link = Link::findOrFail($linkId);
 
@@ -21,7 +21,7 @@ class Dashboard extends Component
 
     #[On('link.created')]
     #[On('link.destroyed')]
-    public function refresh() {}
+    public function refresh(): void {}
 
     public function render()
     {
