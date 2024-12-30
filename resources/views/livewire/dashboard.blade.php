@@ -25,11 +25,11 @@
 <script>
     document.addEventListener('livewire:initialized', () => {
         Livewire.on('show.modal', (event) => {
-            document.getElementById('link_modal').showModal()
+            document.getElementById('link-modal').showModal()
         });
 
         Livewire.on('close.modal', (event) => {
-            document.getElementById('link_modal').close()
+            document.getElementById('link-modal').close()
         });
     });
 </script>

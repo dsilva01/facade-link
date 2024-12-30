@@ -9,7 +9,7 @@ use Livewire\Attributes\Locked;
 
 class NewLinkModal extends Component
 {
-    public string $destination_url;
+    public string $destination_url = '';
 
     public string $title = '';
 

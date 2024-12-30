@@ -2,14 +2,26 @@
 
 namespace App\Livewire;
 
+use App\Models\Link;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public function deleteLink(string $linkId)
+    {
+        $link = Link::findOrFail($linkId);
+
+        $this->authorize('delete', $link);
+
+        if ($link->delete()) {
+            $this->dispatch('link.destroyed');
+        }
+    }
 
     #[On('link.created')]
-    public function refresh(): void
+    #[On('link.destroyed')]
+    public function refresh()
     {
     }
 

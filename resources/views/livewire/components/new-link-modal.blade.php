@@ -1,5 +1,5 @@
 {{-- Do your work, then step back. --}}
-<dialog wire:ignore.self id="link_modal" class="modal" role="dialog">
+<dialog wire:ignore.self id="link-modal" class="modal" role="dialog">
     <div class="modal-box w-11/12 max-w-xl bg-slate-950">
         <form method="dialog">
             <button wire:click="$dispatch('close-link-modal')"
