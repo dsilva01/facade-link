@@ -2,13 +2,14 @@ name: Deployments to Production
  
 on:
   workflow_run:
-    workflows: ["Fix Code Style"]
+    workflows: ["lint"]
     types:
       - completed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    needs: lint
     strategy:
       fail-fast: true
       matrix:
