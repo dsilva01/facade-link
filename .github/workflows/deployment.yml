@@ -25,11 +25,7 @@ jobs:
           coverage: none
 
       - name: Install Composer
-        run: |
-          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-          php composer-setup.php
-          php -r "unlink('composer-setup.php');"
-          php composer.phar install --no-dev --optimize-autoloader
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Deploy to Server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
