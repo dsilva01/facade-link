@@ -1,6 +1,9 @@
 name: Deployments to Production
  
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -9,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.4]
+        php: [8.3]
         node: [18]
 
     steps:
@@ -20,7 +23,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, cli, dev, gd, xml, zip, redis
+          extensions: |
+            dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite,
+            bcmath, soap, intl, gd, exif, iconv, cli, dev, gd, xml, zip, redis
           coverage: none
 
       - name: Install Composer
@@ -30,14 +35,14 @@ jobs:
       - run: php composer.phar install --no-dev --optimize-autoloader
 
       - name: Setup Node JS
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
       - run: npm run production
 
       - name: Deploy to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.SSH_USER }}
           server: ${{ secrets.SSH_SERVER }}
