@@ -32,7 +32,7 @@ jobs:
           php composer.phar install --no-dev --optimize-autoloader
 
       - name: Deploy to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
         with:
           username: ${{ secrets.SSH_USER }}
           server: ${{ secrets.SSH_SERVER }}
