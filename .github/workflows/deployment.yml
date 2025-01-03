@@ -7,11 +7,11 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        php: [8.2]
+        php: [8.4]
 
     steps:
       - name: Checkout code
@@ -29,26 +29,16 @@ jobs:
           npm install
           npm run build
 
-    #  - name: Deploy to Server
-    #    uses: wlixcc/SFTP-Deploy-Action@v1.2.5
-    #    with:
-    #      username: ${{ secrets.SSH_USER }}
-    #      server: ${{ secrets.SSH_SERVER }}
-    #      ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-    #      local_path: './'
-    #      remote_path: '/home/ubuntu/app'
-    #      rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
-
-      - name: 📂 SFTP uploader
-        uses: wangyucode/sftp-upload-action@v2.0.4
+      - name: Deploy to Server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
         with:
-          host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-          forceUpload: true
-          localDir: "."
-          remoteDir: "/var/www/app"
-          exclude: ".git,node_modules,*.log"
+          server: ${{ secrets.SSH_SERVER }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './'
+          remote_path: '/var/www/app'
+          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
+          sftpArgs: '-o ConnectTimeout=5'
 
       - name: Run SSH Commands
         uses: appleboy/ssh-action@master
