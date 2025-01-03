@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Facade Link' }}</title>
-    @vite('resources/css/app.css')
+    @livewireStyles
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="antialiased bg-slate-950 text-slate-200 tracking-tight relative flex flex-col min-h-screen">
@@ -15,6 +16,7 @@
     {{ $slot }}
 
     @include('components.layouts.footer')
+    @livewireScriptConfig
 </body>
 
 </html>
