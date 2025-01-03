@@ -27,7 +27,7 @@ jobs:
       - name: Build Assets
         run: |
           npm install
-          npm run prod
+          npm run build
 
       - name: Deploy to Server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
