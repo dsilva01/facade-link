@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.3]
+        php: [8.2]
 
     steps:
       - name: Checkout code
@@ -21,8 +21,13 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: json, dom, curl, libxml, mbstring
+          extensions: json, dom, curl, libxml, mbstring, openssl
           coverage: none
+      
+      - name: Build Assets
+        run: |
+          npm install
+          npm run prod
 
       - name: Deploy to Server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
@@ -32,7 +37,7 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './'
           remote_path: '/var/www/app'
-          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log --exclude=vendor'
+          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
 
       - name: Run SSH Commands
         uses: appleboy/ssh-action@master
@@ -42,13 +47,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            set -e
             cd /var/www/app
             composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
             php artisan optimize:clear
             php artisan migrate --force
             php artisan optimize
-            npm install --production
-            npm run prod
             sudo systemctl restart php8.4-fpm
             sudo systemctl restart nginx
             sudo chown -R www-data:www-data /var/www/app
