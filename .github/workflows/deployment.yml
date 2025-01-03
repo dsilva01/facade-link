@@ -36,7 +36,7 @@ jobs:
           server: ${{ secrets.SSH_SERVER }}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './'
-          remote_path: '/var/www/app'
+          remote_path: '/home/ubuntu/app'
           rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
 
       - name: Run SSH Commands
