@@ -27,6 +27,7 @@ jobs:
       - name: Build Assets
         run: |
           npm install
+          npm run build
 
       - name: Deploy to Server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
@@ -50,7 +51,6 @@ jobs:
             cd /var/www/app
             sudo composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
             sudo php artisan optimize:clear
-            sudo npm run build
             sudo php artisan migrate --force
             sudo php artisan optimize
             sudo systemctl restart php8.4-fpm
