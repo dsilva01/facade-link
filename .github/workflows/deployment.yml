@@ -16,16 +16,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
- 
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: json, dom, curl, libxml, mbstring
-          coverage: none
+          with:
+            php-version: '8.2'
+            extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+            coverage: none
 
-      - name: Install Composer
-        run: composer install --no-dev --optimize-autoloader
+      - name: Run composer install
+        run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
+ 
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.production .env
+          php artisan key:generate
 
       - name: Deploy to Server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
@@ -36,3 +41,25 @@ jobs:
           local_path: './'
           remote_path: '/var/www/app'
           sftpArgs: '-o ConnectTimeout=5'
+
+      - name: Run SSH Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /var/www/app
+            composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
+            php artisan optimize:clear
+            php artisan migrate --force
+            php artisan optimize:cache
+            npm install --production
+            npm run prod
+            sudo systemctl restart php8.4-fpm
+            sudo systemctl restart nginx
+            sudo chown -R www-data:www-data /var/www/app
+            sudo chmod -R 755 /var/www/app
+            sudo chmod -R 777 /var/www/app/storage
+            sudo chmod -R 777 /var/www/app/bootstrap/cache

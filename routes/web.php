@@ -29,7 +29,7 @@ Route::get('/auth/google/callback', function (Request $request) {
 
     $user = User::where('email', $socialUser->email)->first();
 
-    if (! $user) {
+    if (!$user) {
         $user = User::create([
             'name' => $socialUser->name,
             'email' => $socialUser->email,
