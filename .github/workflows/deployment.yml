@@ -51,9 +51,9 @@ jobs:
             set -e
             cd /var/www/app
             composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
-            php artisan optimize:clear
-            php artisan migrate --force
-            php artisan optimize
+        #    php artisan optimize:clear
+        #    php artisan migrate --force
+        #    php artisan optimize
             sudo systemctl restart php8.4-fpm
             sudo systemctl restart nginx
             sudo chown -R www-data:www-data /var/www/app
