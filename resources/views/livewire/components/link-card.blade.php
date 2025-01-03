@@ -7,9 +7,9 @@
                 <p class="text-sm text-slate-500">{{ $link->destination_url }}</p>
             </div>
             <div class="flex items-center gap-2">
-                <a href="#">
+                {{-- <a href="#">
                     <x-icons.chart-square class="h-6 w-6" />
-                </a>
+                </a> --}}
                 <button x-on:click="navigator.share({ url: '{{ route('links.redirect', $link->url_key) }}' })">
                     <x-icons.share class="h-6 w-6" />
                 </button>
