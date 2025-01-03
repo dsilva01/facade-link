@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->isProduction()
         );
 
-        Pulse::user(fn($user) => [
+        Pulse::user(fn ($user) => [
             'name' => $user->name,
             'extra' => $user->email,
             'avatar' => $user->avatar,
