@@ -17,6 +17,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json, dom, curl, libxml, mbstring
+          coverage: none
+
       - name: Deploy to Server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
         with:
@@ -25,6 +32,7 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './'
           remote_path: '/var/www/app'
+          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log --exclude=vendor'
 
       - name: Run SSH Commands
         uses: appleboy/ssh-action@master
