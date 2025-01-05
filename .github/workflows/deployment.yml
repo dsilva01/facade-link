@@ -38,11 +38,11 @@ jobs:
             composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
             npm install
             npm run build
-            chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} /var/www/app
-            chmod -R 755 /var/www/app/storage /var/www/app/bootstrap/cache
+            sudo chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} /var/www/app
+            sudo chmod -R 755 /var/www/app/storage /var/www/app/bootstrap/cache
             php artisan migrate --force
             php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
-            systemctl restart php8.4-fpm
-            systemctl restart nginx
+            sudo systemctl restart php8.4-fpm
+            sudo systemctl restart nginx
