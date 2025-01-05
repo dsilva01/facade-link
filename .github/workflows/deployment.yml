@@ -24,25 +24,7 @@ jobs:
           extensions: json, dom, curl, libxml, mbstring, openssl
           coverage: none
 
-      - name: Install Composer
-        run: composer install --no-dev --prefer-dist --optimize-autoloader
-      
-      - name: Build Assets
-        run: |
-          npm install
-          npm run build
-
-      - name: Deploy to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
-        with:
-          username: ${{ secrets.SSH_USER }}
-          server: ${{ secrets.SSH_SERVER }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './'
-          remote_path: '/var/www/app'
-          sftpArgs: '-o ConnectTimeout=5'
-
-      - name: Run SSH Commands
+      - name: Deploy Application
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_SERVER }}
@@ -52,11 +34,15 @@ jobs:
           script: |
             set -e
             cd /var/www/app
+            git pull origin main
             sudo composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
-            sudo php artisan optimize:clear
-            sudo php artisan migrate --force
-            sudo php artisan optimize
-            sudo systemctl restart php8.4-fpm
-            sudo systemctl restart nginx
+            sudo npm install
+            sudo npm run build
             sudo chown -R www-data:www-data /var/www/app
             sudo chmod -R 755 /var/www/app/storage /var/www/app/bootstrap/cache
+            sudo php artisan migrate --force
+            sudo php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            sudo systemctl restart php8.4-fpm
+            sudo systemctl restart nginx
