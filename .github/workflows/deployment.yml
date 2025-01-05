@@ -34,4 +34,5 @@ jobs:
           script: |
             set -e
             cd /var/www/app
+            git pull origin main
             
