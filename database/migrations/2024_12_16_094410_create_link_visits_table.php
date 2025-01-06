@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('link_visits', function (Blueprint $table) {
+        Schema::create('link_visits', function (Blueprint $table): void {
             $table->bigIncrements('id');
             $table->foreignIdFor(Link::class)->constrained()->cascadeOnDelete();
             $table->string('ip_address')->nullable();

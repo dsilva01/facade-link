@@ -30,14 +30,12 @@ class AppServiceProvider extends ServiceProvider
             $this->app->isProduction()
         );
 
-        Pulse::user(fn ($user) => [
+        Pulse::user(fn ($user): array => [
             'name' => $user->name,
             'extra' => $user->email,
             'avatar' => $user->avatar,
         ]);
 
-        Gate::define('viewPulse', function (User $user) {
-            return $user->email === 'jonquerfutila@gmail.com';
-        });
+        Gate::define('viewPulse', fn(User $user): bool => $user->email === 'jonquerfutila@gmail.com');
     }
 }
