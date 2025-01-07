@@ -29,12 +29,11 @@ jobs:
         with:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           script: |
             set -e
             cd /var/www/app
-            sudo chown -R ${{ secrets.SSH_USER }}:${{ secrets.SSH_USER }} /var/www/app
             git pull origin main
             composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
             npm install
