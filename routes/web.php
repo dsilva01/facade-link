@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
+Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/terms', 'terms')->name('terms');
+
+
 Route::get('/', Landing::class)->name('landing');
 Route::get('/dashboard', Dashboard::class)->name('dashboard')->middleware('auth');
 Route::get('/settings', Settings::class)->name('settings')->middleware('auth');
@@ -29,7 +33,7 @@ Route::get('/auth/google/callback', function (Request $request) {
 
     $user = User::where('email', $socialUser->email)->first();
 
-    if (! $user) {
+    if (!$user) {
         $user = User::create([
             'name' => $socialUser->name,
             'email' => $socialUser->email,
