@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Pulse\Facades\Pulse;
 
@@ -30,7 +31,11 @@ class AppServiceProvider extends ServiceProvider
             $this->app->isProduction()
         );
 
-        Pulse::user(fn ($user): array => [
+        if ($this->app->isProduction()) {
+            URL::forceSchema('https');
+        }
+
+        Pulse::user(fn($user): array => [
             'name' => $user->name,
             'extra' => $user->email,
             'avatar' => $user->avatar,
