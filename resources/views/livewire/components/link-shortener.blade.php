@@ -4,7 +4,7 @@
     <div>
         <input wire:model.live="destination_url" type="url" id="destination_url" name="destination_url"
             required="required" autofocus="autofocus" autocomplete="destination_url"
-            placeholder="Comece colando seu link aqui"
+            placeholder="Comece colando sua URL aqui"
             class="input input-bordered block w-full resize-none rounded-3xl text-white text-sm border-purple-500/70 bg-slate-900/50 shadow-sm p-7 focus-within:border-purple-500 focus-within:text-white focus-within:ring-[5px] focus-within:ring-purple-500/20" />
         @error('destination_url')
             <span class="text-sm text-red-500 mt-2">{{ $message }}</span>
