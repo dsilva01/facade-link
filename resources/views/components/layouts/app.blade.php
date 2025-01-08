@@ -19,7 +19,6 @@
     <meta property="og:title" content="{{ config('app.name', 'Pinkary') }} - Transforme cliques em dados valiosos" />
     <meta property="og:description"
         content="{{ config('app.name', 'Pinkary') }} - Transforme cliques em dados valiosos" />
-    <meta property="og:image" content="{{ asset('images/logo.png') }}" />
 
     <title>{{ config('app.name', 'Facade Link') }}</title>
 
