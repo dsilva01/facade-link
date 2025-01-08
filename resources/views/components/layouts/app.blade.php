@@ -19,6 +19,8 @@
     <meta property="og:title" content="{{ config('app.name', 'Pinkary') }} - Transforme cliques em dados valiosos" />
     <meta property="og:description"
         content="{{ config('app.name', 'Pinkary') }} - Transforme cliques em dados valiosos" />
+    <meta property="og:image"
+        content="{{ asset('img/banner.png') }} />
 
     <title>{{ config('app.name', 'Facade Link') }}</title>
 
@@ -27,7 +29,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @if (app()->environment('production'))
-        <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWH9PBG6L0"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -39,16 +41,17 @@
 
             gtag('config', 'G-TWH9PBG6L0');
         </script>
-    @endif
+@endif
 </head>
 
-<body class="antialiased bg-slate-950 text-slate-200 tracking-tight relative flex flex-col min-h-screen">
+<body class="antialiased
+        bg-slate-950 text-slate-200 tracking-tight relative flex flex-col min-h-screen">
     @include('components.layouts.navigation')
 
     {{ $slot }}
 
     @include('components.layouts.footer')
     @livewireScriptConfig
-</body>
+    </body>
 
 </html>
