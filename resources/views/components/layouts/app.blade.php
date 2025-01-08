@@ -17,9 +17,6 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ config('app.name', 'Pinkary') }} - Transforme cliques em dados valiosos" />
-    <meta property="og:description"
-        content="{{ config('app.name', 'Pinkary') }} - Transforme cliques em dados valiosos" />
-
 
     <title>{{ config('app.name', 'Facade Link') }}</title>
 
