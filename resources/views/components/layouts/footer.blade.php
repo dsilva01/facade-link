@@ -9,5 +9,7 @@
                 class="underline underline-offset-2 hover:no-underline">Monteiro Futila</a>
         </p>
         <p>Copyright &copy; {{ date('Y') }} - All right reserved</p>
+        <p><a href="{{ route('privacy') }}" class="underline underline-offset-2 hover:no-underline">Política de
+                privacidade</a></p>
     </aside>
 </footer>
