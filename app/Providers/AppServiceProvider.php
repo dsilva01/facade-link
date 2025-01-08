@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         if ($this->app->isProduction()) {
-            URL::forceSchema('https');
+            URL::forceHttps(true);
         }
 
         Pulse::user(fn($user): array => [
