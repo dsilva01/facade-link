@@ -1,66 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="public/img/banner.png" width="600" alt="Illustration of Pinkary logo. The logo is composed of stylized white text spelling out 'Pinkary' with a pink dot at the end.">
 </p>
 
-## About Laravel
+**Facade Link!** é uma ferramenta online que permite criar links encurtados e rastreáveis com foco em postagens em redes sociais, medir o sucesso de campanhas de marketing ou ações de influenciadores.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Pinkary é uma aplicação regular do Laravel; ele é baseado no Laravel 11 e usa CSS Livewire/Tailwind para o frontend. Se você conhece o Laravel, deve se sentir em casa.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Em termos de desenvolvimento local, você pode usar os seguintes requisitos:
 
-## Learning Laravel
+- PHP 8.4 - com SQLite, GD e outras extensões comuns.
+- Node.js 16 ou mais recente.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Se você tiver estes requisitos, pode começar clonando o repositório e instalando as dependências:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone https://github.com/monteirofutila/facade-link.git
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+cd facade-link
 
-## Laravel Sponsors
+git checkout -b feat/your-feature # or fix/your-fix
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+> **Não envie diretamente para o branch `main`**. Em vez disso, crie um novo branch e envie-o para seu branch.
 
-### Premium Partners
+Em seguida, instale as dependências usando [Composer](https://getcomposer.org) e [NPM](https://www.npmjs.com):
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+composer install
 
-## Contributing
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Depois disso, configure seu arquivo `.env`:
 
-## Code of Conduct
+```bash
+cp .env.example .env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+Prepare seu banco de dados e execute as migrações:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+touch database/database.sqlite
 
-## License
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Vincule o armazenamento à pasta pública:
+
+```bash
+php artisan storage:link
+```
+
+Em um **terminal separado**, crie os ativos no modo de observação:
+
+```bash
+npm run dev
+```
+
+Também em um **terminal separado**, execute o trabalhador da fila:
+
+```bash
+php artisan queue:work
+```
+
+Finalmente, inicie o servidor de desenvolvimento:
+
+```bash
+php artisan serve
+```
+
+Depois de concluir as alterações no código, execute o conjunto de testes para garantir que tudo ainda esteja funcionando:
+
+```bash
+composer test
+```
+
+Se tudo estiver verde, envie seu branch e crie uma solicitação pull:
+
+```bash
+git commit -am "Your commit message"
+
+git push
+```
+
+## Ferramentas
+
+Facade usa algumas ferramentas para garantir a qualidade e consistência do código. Claro, usamos [PHPStan](https://phpstan.org) para análise estática. Em termos de estilo de código, usamos [Laravel Pint](https://laravel.com/docs/11.x/pint) para garantir que o código seja consistente e siga as convenções do Laravel. Também usamos [Rector](https://getrector.org) para garantir que o código esteja atualizado com a versão mais recente do PHP.
+
+Você executa essas ferramentas individualmente usando os seguintes comandos:
+
+```bash
+# Lint the code using Pint
+./vendor/bin/pint
+./vendor/bin/pint --test
+
+# Refactor the code using Rector
+vendor/bin/rector
+vendor/bin/rector --dry-run
+
+# Run PHPStan
+./vendor/bin/phpstan analyse
+
+# Run all the tools
+composer test
+```
+
+As solicitações pull que não passarem no conjunto de testes não serão mescladas. Portanto, conforme sugerido na seção [Instalação](#instalação), certifique-se de executar o conjunto de testes antes de enviar seu branch.
+
+## Produção
+
+Facade está hospedado em [Contabo](https://contabo.com) e o servidor está rodando no Ubuntu 24.04 de 4 vCPUs, 6GB RAM.
+
+O único serviço que utilizamos é o [Google Auth Platform](https://console.cloud.google.com) para autenticação OAuth. Além disso, SQLite é utilizado como driver de banco de dados, driver de sessão, driver de fila, driver de cache, etc.
+
+---
+
+Facade é um software de código aberto licenciado sob a **[GNU Affero General Public License](LICENSE.md)**
