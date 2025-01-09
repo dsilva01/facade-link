@@ -119,4 +119,4 @@ O único serviço que utilizamos é o [Google Auth Platform](https://console.clo
 
 ---
 
-Facade é um software de código aberto licenciado sob a **[GNU Affero General Public License](LICENSE.md)**
+Facade é um software de código aberto licenciado sob a **[MIT License](LICENSE)**
