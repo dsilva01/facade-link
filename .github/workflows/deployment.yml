@@ -34,16 +34,28 @@ jobs:
           script: |
             set -e
             cd /var/www/app
+            php artisan down
             git pull origin main
+            git fetch
             export COMPOSER_ALLOW_SUPERUSER=1
-            composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
+            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+            php artisan cache:clear
+            php artisan config:clear
+            php artisan config:cache
+            php artisan view:clear
+            php artisan view:cache
+            php artisan event:clear
+            php artisan event:cache
+            php artisan route:clear
+            php artisan route:cache
+            php artisan queue:restart
+            export NODE_OPTIONS=--max-old-space-size=1024
             npm install
             npm run build
             php artisan migrate --force
-            php artisan optimize:clear
-            php artisan config:cache
-            php artisan route:cache
+            php artisan pulse:restart
             sudo chown -R www-data:www-data /var/www/app
             sudo chmod -R 755 /var/www/app/storage /var/www/app/bootstrap/cache
             sudo systemctl restart php8.4-fpm
             sudo systemctl restart nginx
+            php artisan up
