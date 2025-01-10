@@ -6,7 +6,7 @@
 
 ## Installation
 
-Pinkary é uma aplicação regular do Laravel; ele é baseado no Laravel 11 e usa CSS Livewire/Tailwind para o frontend. Se você conhece o Laravel, deve se sentir em casa.
+Facade é uma aplicação regular do Laravel; ele é baseado no Laravel 11 e usa CSS Livewire/Tailwind para o frontend. Se você conhece o Laravel, deve se sentir em casa.
 
 Em termos de desenvolvimento local, você pode usar os seguintes requisitos:
 
