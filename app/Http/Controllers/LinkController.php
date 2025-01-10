@@ -25,10 +25,10 @@ class LinkController extends Controller
         ]);
 
         RecordVisitJob::dispatch($dto);
-
+        
         return redirect()->away($link->destination_url);
     }
-
+    
     public function store(StoreLinkRequest $request, CreateNewLink $createNewLink): RedirectResponse
     {
         $dto = StoreLinkDTOData::from([

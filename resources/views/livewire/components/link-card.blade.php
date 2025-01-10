@@ -10,8 +10,12 @@
                 {{-- <a href="#">
                     <x-icons.chart-square class="h-6 w-6" />
                 </a> --}}
-                <button x-on:click="navigator.share({ url: '{{ route('links.redirect', $link->url_key) }}' })">
+                <button x-on:click="navigator.share({ url: '{{ route('links.redirect', $link->url_key) }}', title: '{{ $link->title }}' })">
                     <x-icons.share class="h-6 w-6" />
+                </button>
+                <button x-on:click="navigator.share({ url: '{{ route('links.redirect', $link->url_key) }}', title: '{{ $link->title }}', files: [{{ $qr_code }}] })">
+                    {{-- <x-icons.qr-code class="h-6 w-6" /> --}}
+                    ss
                 </button>
                 <button type="button" wire:click="$parent.deleteLink('{{ $link->id }}')"
                     wire:confirm="Tem certeza de que deseja excluir este link?">
